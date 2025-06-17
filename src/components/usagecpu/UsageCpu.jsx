@@ -1,6 +1,6 @@
 import ProgressBar from '@ramonak/react-progress-bar';
 import {motion} from 'framer-motion';
-import {Cpu} from 'lucide-react';
+import {Droplet} from 'lucide-react';
 
 const UsageCpu = ({cpuUsage}) => {
   const getUsageColor = usage => {
@@ -33,8 +33,8 @@ const UsageCpu = ({cpuUsage}) => {
 
       <div className="flex items-center justify-between w-full mb-2">
         <div className="flex items-center">
-          <Cpu className="h-5 w-5 mr-2 text-blue-400" />
-          <h2 className="text-xl font-medium text-gray-200">CPU Usage</h2>
+          <Droplet className="h-5 w-5 mr-2 text-blue-400" />
+          <h2 className="text-xl font-medium text-gray-200">Humidity</h2>
         </div>
         <div
           className="px-2 py-1 bg-gray-700/50 rounded-md text-xs"
@@ -96,18 +96,12 @@ const UsageCpu = ({cpuUsage}) => {
           borderRadius="6px"
         />
         <div className="flex justify-between items-center mb-2">
-          <div className="flex items-center mb-3 px-1">
-            <div className="w-2 h-2 rounded-full bg-green-400 mr-1"></div>
-            <span className="text-sm text-gray-400">
-              Active Cores: {Math.max(1, Math.round(cpuUsage / 25))}/4
-            </span>
-          </div>
           <div className="text-sm text-gray-400 mb-2">
             {cpuUsage > 90
-              ? 'System may be slow'
+              ? 'High humidity'
               : cpuUsage > 70
-                ? 'High load'
-                : 'System responsive'}
+                ? 'Moderate humidity'
+                : 'Low humidity'}
           </div>
         </div>
       </div>

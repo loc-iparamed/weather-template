@@ -9,20 +9,23 @@ import {
   ResponsiveContainer,
   Cell,
 } from 'recharts';
-import {ArrowUp, ArrowDown, BarChart2} from 'lucide-react';
+import {Thermometer, BarChart2, Droplet} from 'lucide-react';
 
-const COLORS = ['#10B981', '#F59E0B']; // Green for Get On, Amber for Get Off
+const COLORS = ['#ff8c19', '#0866ff'];
 
 const GetOnOffChart = ({peopleGetOn, peopleGetOff}) => {
   const GET_ON_OFF_DATA = [
-    {name: 'Get On', value: peopleGetOn ?? 0, icon: ArrowUp},
-    {name: 'Get Off', value: peopleGetOff ?? 0, icon: ArrowDown},
+    {
+      name: 'Temperature',
+      value: peopleGetOn ?? 0,
+      icon: Thermometer,
+      unit: '°C',
+    },
+    {name: 'Humidity', value: peopleGetOff ?? 0, icon: Droplet, unit: '%'},
   ];
 
-  const total = (peopleGetOn ?? 0) + (peopleGetOff ?? 0);
-  const maxValue = Math.max(peopleGetOn ?? 0, peopleGetOff ?? 0, 1); // Ensure at least 1 for scaling
+  const maxValue = Math.max(peopleGetOn ?? 0, peopleGetOff ?? 0, 1);
 
-  // Custom tooltip component
   const CustomTooltip = ({active, payload}) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -38,8 +41,8 @@ const GetOnOffChart = ({peopleGetOn, peopleGetOff}) => {
             <p className="text-sm text-gray-300">
               <span className="font-bold" style={{color: payload[0].color}}>
                 {data.value}
-              </span>{' '}
-              people
+              </span>
+              {data.unit}
             </p>
           </div>
         </div>
@@ -66,12 +69,7 @@ const GetOnOffChart = ({peopleGetOn, peopleGetOff}) => {
       <div className="flex items-center h-1 justify-between mb-4">
         <div className="flex items-center">
           <BarChart2 className="h-5 w-5 mr-2 text-blue-400" />
-          <h2 className="text-2xl font-medium text-gray-200">
-            Passenger Movement
-          </h2>
-        </div>
-        <div className="px-2 py-1 bg-gray-700/50 rounded-md text-xs text-gray-300">
-          Traffic total: {total}
+          <h2 className="text-2xl font-medium text-gray-200">Climate Chart</h2>
         </div>
       </div>
 
@@ -91,14 +89,6 @@ const GetOnOffChart = ({peopleGetOn, peopleGetOff}) => {
                 <div className="text-lg text-gray-400">{item.name}</div>
                 <div className="text-xl font-bold text-white">{item.value}</div>
               </div>
-            </div>
-            <div
-              className="text-xs font-medium px-2 py-1 rounded-full"
-              style={{
-                backgroundColor: `${COLORS[index]}20`,
-                color: COLORS[index],
-              }}>
-              {Math.round((item.value / (total || 1)) * 100)}%
             </div>
           </motion.div>
         ))}
@@ -127,7 +117,7 @@ const GetOnOffChart = ({peopleGetOn, peopleGetOff}) => {
               axisLine={false}
               tickLine={false}
               fontSize={12}
-              domain={[0, maxValue + Math.ceil(maxValue * 0.2)]} // Add 20% headroom
+              domain={[0, maxValue + Math.ceil(maxValue * 0.2)]}
             />
             <Tooltip content={<CustomTooltip />} />
             <Bar

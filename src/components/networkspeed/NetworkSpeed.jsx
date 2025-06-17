@@ -1,5 +1,5 @@
 import {motion} from 'framer-motion';
-import {Wifi, ArrowUp} from 'lucide-react';
+import {ArrowUp, Sun} from 'lucide-react';
 import Speedometer, {
   Background,
   Arc,
@@ -8,13 +8,11 @@ import Speedometer, {
 } from 'react-speedometer';
 
 const NetworkSpeed = ({speed}) => {
-  const getSpeedQuality = speed => {
-    if (speed < 5) return {text: 'Slow', color: '#ff3200'};
-    if (speed < 15) return {text: 'Good', color: '#ddff00'};
-    return {text: 'Excellent', color: '#15ffbf'};
-  };
-
-  const speedQuality = getSpeedQuality(speed);
+  // const getSpeedQuality = speed => {
+  //   if (speed < 5) return {text: 'Slow', color: '#ff3200'};
+  //   if (speed < 15) return {text: 'Good', color: '#ddff00'};
+  //   return {text: 'Excellent', color: '#15ffbf'};
+  // };
 
   return (
     <motion.div
@@ -29,27 +27,25 @@ const NetworkSpeed = ({speed}) => {
       transition={{delay: 0.1}}>
       <div className="absolute -top-20 -right-20 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl"></div>
-
       <div className="flex items-center justify-between  w-full mb-2">
-        <h2 className="text-xl font-medium text-gray-100">Network Speed</h2>
+        <h2 className="text-2xl font-medium text-gray-100">Light Density</h2>
         <div className="flex items-center px-2 py-1 bg-gray-700/50 rounded-md text-xs text-gray-300">
           <ArrowUp className="w-3 h-3 mr-1" />
           Upload
         </div>
       </div>
-
       <div className="w-full h-200 flex justify-center relative mt-10">
         <Speedometer
           value={speed}
           max={30}
-          accentColor="grey"
+          accentColor="#facc15"
           angle={180}
           width={650}
           height={350}
           fontFamily="Inter, sans-serif">
-          <Background angle={180} color="#05a8b2" opacity={0.2} />
-          <Arc arcWidth={20} color="#2a2a3c" />
-          <Progress arcWidth={20} color={speedQuality.color} />
+          <Background angle={180} color="#facc15" opacity={0.15} />
+          <Arc arcWidth={20} color="#3a3a3a" />
+          <Progress arcWidth={20} color="#facc15" />
           <Indicator>
             {(value, textProps) => (
               <g>
@@ -58,9 +54,8 @@ const NetworkSpeed = ({speed}) => {
                   fontSize={65}
                   fill="white"
                   x={325}
-                  y={200}
+                  y={220}
                   textAnchor="middle"
-                  fontFamily="Inter, sans-serif"
                   fontWeight="bold">
                   {value}
                 </text>
@@ -69,22 +64,10 @@ const NetworkSpeed = ({speed}) => {
                   fontSize={25}
                   fill="white"
                   x={325}
-                  y={230}
-                  textAnchor="middle"
-                  fontFamily="Inter, sans-serif"
-                  opacity={0.7}>
-                  Mbps
-                </text>
-                <text
-                  {...textProps}
-                  fontSize={20}
-                  fill={speedQuality.color}
-                  x={325}
                   y={260}
                   textAnchor="middle"
-                  fontFamily="Inter, sans-serif"
-                  fontWeight="medium">
-                  {speedQuality.text}
+                  opacity={0.7}>
+                  Lumens
                 </text>
               </g>
             )}
@@ -92,28 +75,7 @@ const NetworkSpeed = ({speed}) => {
         </Speedometer>
 
         <div className="absolute top-[25%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-white opacity-20">
-          <Wifi size={90} strokeWidth={1.5} color="white" />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-3 gap-4 w-full mt-12">
-        <div className="bg-gray-700/30 rounded-lg p-2 text-center">
-          <div className="text-base text-gray-400">Latency</div>
-          <div className="text-lg font-medium text-white">
-            {Math.round(30 - speed * 0.8)}ms
-          </div>
-        </div>
-        <div className="bg-gray-700/30 rounded-lg p-2 text-center">
-          <div className="text-base text-gray-400">Packet Loss</div>
-          <div className="text-lg font-medium text-white">
-            {Math.round(speed * 0.1)}%
-          </div>
-        </div>
-        <div className="bg-gray-700/30 rounded-lg p-2 text-center">
-          <div className="text-base text-gray-400">Signal</div>
-          <div className="text-lg font-medium text-white">
-            {Math.min(100, 60 + speed * 1.5)}%
-          </div>
+          <Sun size={90} strokeWidth={1.5} color="white" />
         </div>
       </div>
     </motion.div>

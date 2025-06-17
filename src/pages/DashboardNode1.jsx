@@ -1,19 +1,13 @@
-import {Users, ArrowBigUp, ArrowBigDown, MapPinned} from 'lucide-react';
 import {motion} from 'framer-motion';
 import mqtt from 'mqtt';
 import {useEffect, useState} from 'react';
-// import Header from '../components/common/Header';
-import SpeedometerComponent from '../components/speedometer/SpeedometerComponent';
-import StatCard from '../components/common/StatCard';
-import StatCardCustom from '../components/common/StatCardCustom';
-import StorageChart from '../components/storagechart/StorageChart';
+
 import ThermalCpu from '../components/thermalcpu/ThermalCpu';
 import UsageCpu from '../components/usagecpu/UsageCpu';
 import PeoplePresentChart from '../components/people_present_chart/PeoplePresentChart';
-import MapComponent from '../components/map/MapComponent';
+
 import GetOnOffChart from '../components/overview/GetOnOffChart';
-import LocationDisplay from '../components/locationdisplay/LocationDisplay';
-import CapturePhoto from '../components/capturephoto/CapurePhoto';
+
 import NetworkSpeed from '../components/networkspeed/NetworkSpeed';
 
 const BROKER = 'wss://mqtt1.eoh.io:8084';
@@ -41,7 +35,7 @@ const topics = {
     'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/92134/value',
 };
 
-const DashBoardPage = () => {
+const DashboardNode1 = () => {
   const [dashboardData, setDashboardData] = useState({
     peopleGetOn: 25,
     peopleGetOff: 16,
@@ -96,86 +90,24 @@ const DashBoardPage = () => {
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
-          <div className="grid gap-5">
-            <div className="grid grid-cols-2 gap-5">
-              <StatCard
-                name="Get On"
-                icon={ArrowBigUp}
-                value={dashboardData.peopleGetOn}
-                color="#6EE7B7"
-              />
-              <StatCard
-                name="Get Off"
-                icon={ArrowBigDown}
-                value={dashboardData.peopleGetOff}
-                color="#FACC15"
-              />
-            </div>
-            <StatCardCustom
-              name="Student Presence Count"
-              icon={Users}
-              value={dashboardData.peoplePresent}
-              color="#EC4899"
-            />
-          </div>
-          <div className="grid grid-rows-[1fr_0.8fr] gap-5">
-            <GetOnOffChart
-              peopleGetOn={dashboardData.peopleGetOn}
-              peopleGetOff={dashboardData.peopleGetOff}
-            />
-            <PeoplePresentChart peoplePresent={dashboardData.peoplePresent} />
-          </div>
-          <CapturePhoto peoplePresent={dashboardData.peoplePresent} />
+          <ThermalCpu cpuTemp={dashboardData.cpuTemp} />
+          <UsageCpu cpuUsage={dashboardData.cpuUsage} />
+          <GetOnOffChart
+            peopleGetOn={dashboardData.peopleGetOn}
+            peopleGetOff={dashboardData.peopleGetOff}
+          />
         </motion.div>
-
         <motion.div
+          className="grid grid-cols-2 gap-5 mb-5"
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 ">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-              <LocationDisplay
-                name="GPS Location"
-                icon={MapPinned}
-                value={{
-                  latitude: dashboardData.latitude,
-                  longitude: dashboardData.longitude,
-                  gpsStatus: dashboardData.gpsStatus,
-                  speed: dashboardData.speed,
-                }}
-                color="#60a5fa"
-              />
-              <SpeedometerComponent speed={dashboardData.speed} />
-            </div>
-            <MapComponent
-              latitude={dashboardData.latitude}
-              longitude={dashboardData.longitude}
-              speed={dashboardData.speed}
-            />
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="mt-5"
-          initial={{opacity: 0, y: 20}}
-          animate={{opacity: 1, y: 0}}
-          transition={{duration: 0.5}}>
-          <div className="grid grid-cols-3 gap-5">
-            <StorageChart
-              totalGb={dashboardData.totalGb}
-              usedGb={dashboardData.usedGb}
-              freeGb={dashboardData.freeGb}
-            />
-            <div className="grid grid-rows-2 gap-3">
-              <ThermalCpu cpuTemp={dashboardData.cpuTemp} />
-              <UsageCpu cpuUsage={dashboardData.cpuUsage} />
-            </div>
-            <NetworkSpeed speed={dashboardData.uploadSpeed} />
-          </div>
+          <NetworkSpeed speed={dashboardData.uploadSpeed} />
+          <PeoplePresentChart peoplePresent={dashboardData.peoplePresent} />
         </motion.div>
       </main>
     </div>
   );
 };
 
-export default DashBoardPage;
+export default DashboardNode1;

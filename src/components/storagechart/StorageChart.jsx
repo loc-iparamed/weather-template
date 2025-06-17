@@ -45,7 +45,7 @@ const StorageChart = ({totalGb, usedGb, freeGb}) => {
       <div className="flex items-center justify-between w-full mb-2">
         <div className="flex items-center">
           <HardDrive className="h-5 w-5 mr-2 text-violet-300" />
-          <h2 className="text-2xl font-medium text-gray-200">Storage Usage</h2>
+          <h2 className="text-2xl font-medium text-gray-200">CO2 Density</h2>
         </div>
         <div
           className="px-2 py-1 bg-gray-700/50 rounded-md text-base"

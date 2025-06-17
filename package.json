@@ -1,6 +1,6 @@
 {
   "name": "admin-dashboard",
-  "homepage": "/template_intelschoolbus/",
+  "homepage": "/weather-station/",
   "private": true,
   "version": "0.0.0",
   "type": "module",

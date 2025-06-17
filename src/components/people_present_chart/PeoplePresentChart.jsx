@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import ReactApexChart from 'react-apexcharts';
 import {motion} from 'framer-motion';
-import {Users, Activity} from 'lucide-react';
+import {Activity} from 'lucide-react';
 
 const PeoplePresentChart = ({peoplePresent}) => {
   const [series, setSeries] = useState([{data: []}]);
@@ -9,14 +9,15 @@ const PeoplePresentChart = ({peoplePresent}) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const now = new Date();
+      const now = new Date(
+        new Date().toLocaleString('en-US', {timeZone: 'Asia/Ho_Chi_Minh'}),
+      );
       setSeries(prevSeries => {
         const newData = [
           ...prevSeries[0].data.slice(-19),
           {x: now, y: peoplePresent},
         ];
 
-        // Update max people for y-axis scaling
         const currentMax = Math.max(...newData.map(point => point.y), 1);
         if (currentMax > maxPeople) {
           setMaxPeople(currentMax);
@@ -43,7 +44,7 @@ const PeoplePresentChart = ({peoplePresent}) => {
       background: 'transparent',
       fontFamily: 'Inter, sans-serif',
     },
-    colors: ['#5dd0fd'],
+    colors: ['#8b5cf6'],
     stroke: {
       curve: 'smooth',
       width: 3,
@@ -54,7 +55,7 @@ const PeoplePresentChart = ({peoplePresent}) => {
     xaxis: {
       type: 'datetime',
       labels: {
-        style: {colors: 'white', fontSize: '12px'},
+        style: {colors: 'white', fontSize: '14px'},
         formatter: value => {
           return new Date(value).toLocaleTimeString('vi-VN', {
             hour: '2-digit',
@@ -70,13 +71,13 @@ const PeoplePresentChart = ({peoplePresent}) => {
       labels: {
         style: {
           colors: 'white',
-          fontSize: '12px',
+          fontSize: '14px',
         },
         formatter: value => `${Math.round(value)}`,
       },
       min: 0,
       max: Math.max(maxPeople + 1, 3), // Ensure we have some headroom
-      tickAmount: 3,
+      tickAmount: 2,
     },
     grid: {
       borderColor: 'rgba(107, 114, 128, 0.2)',
@@ -91,7 +92,7 @@ const PeoplePresentChart = ({peoplePresent}) => {
         top: 0,
         right: 0,
         bottom: 0,
-        left: 10,
+        left: 20,
       },
     },
     tooltip: {
@@ -115,7 +116,7 @@ const PeoplePresentChart = ({peoplePresent}) => {
         shade: 'dark',
         type: 'vertical',
         shadeIntensity: 0.5,
-        gradientToColors: ['rgba(93, 208, 253, 0.1)'],
+        gradientToColors: ['rgba(149, 93, 253, 0.1)'],
         inverseColors: false,
         opacityFrom: 0.6,
         opacityTo: 0.1,
@@ -138,10 +139,9 @@ const PeoplePresentChart = ({peoplePresent}) => {
       <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl"></div>
 
-      <div className="flex items-center justify-between w-full h-1 mb-2">
+      <div className="flex items-center justify-between w-full h-1 mb-8 mt-5">
         <div className="flex items-center">
-          <Users className="h-5 w-5 mr-2 text-blue-400" />
-          <h2 className="text-2xl font-medium text-gray-200">People Present</h2>
+          <h2 className="text-2xl font-medium text-gray-200">CO2 Density</h2>
         </div>
         <div className="flex items-center px-2 py-1 bg-gray-700/50 rounded-md text-xs text-gray-400">
           <Activity className="h-3 w-3 mr-1 text-green-400" />
@@ -149,39 +149,15 @@ const PeoplePresentChart = ({peoplePresent}) => {
         </div>
       </div>
 
-      {/* <div className="flex items-center justify-between mt-2 mb-1">
-        <div className="text-3xl font-bold text-white">{peoplePresent}</div>
-        <div className="text-xs text-gray-400">Last 20 seconds</div>
-      </div> */}
-
-      <div className="h-40">
+      <div className="h-80 w-full">
         <ReactApexChart
           options={options}
           series={series}
           type="area"
-          height="110%"
+          height="100%"
           width="100%"
         />
       </div>
-
-      {/* <div className="flex justify-between items-center mt-4 text-xs text-gray-100">
-        <div>Max: {maxPeople}</div>
-        <div>
-          Avg:{' '}
-          {series[0].data.length > 0
-            ? (
-                series[0].data.reduce((sum, point) => sum + point.y, 0) /
-                series[0].data.length
-              ).toFixed(1)
-            : 0}
-        </div>
-        <div>
-          Min:{' '}
-          {series[0].data.length > 0
-            ? Math.min(...series[0].data.map(point => point.y))
-            : 0}
-        </div>
-      </div> */}
     </motion.div>
   );
 };

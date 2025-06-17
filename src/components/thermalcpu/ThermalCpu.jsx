@@ -4,7 +4,7 @@ import {Thermometer} from 'lucide-react';
 
 const ThermalCpu = ({cpuTemp}) => {
   const getTempColor = temp => {
-    if (temp < 50) return '#15ffbf'; // Cool - green
+    if (temp < 50) return '#ff8c19'; // Cool - green
     if (temp < 65) return '#ffa500'; // Warm - orange
     if (temp < 80) return '#FACC15'; // Hot - yellow
     return '#EF4444';
@@ -34,7 +34,7 @@ const ThermalCpu = ({cpuTemp}) => {
       <div className="flex items-center justify-between w-full mb-2">
         <div className="flex items-center">
           <Thermometer className="h-5 w-5 mr-2 text-orange-400" />
-          <h2 className="text-xl font-medium text-gray-200">CPU Temperature</h2>
+          <h2 className="text-xl font-medium text-gray-200">Temperature</h2>
         </div>
         <div
           className="px-2 py-1 bg-gray-700/50 rounded-md text-xs"

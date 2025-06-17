@@ -4,11 +4,11 @@ import {useNavigate} from 'react-router-dom';
 const Header = ({title}) => {
   const navigate = useNavigate();
   const handleAdminClick = () => {
-    navigate('/template_intelschoolbus/users');
+    navigate('/weather-station/users');
   };
   return (
     <motion.header
-      className="bg-gray-800/70 backdrop-blur-md shadow-lg border-b border-gray-700/50 sticky top-0 z-50"
+      className="bg-[#1f3336]/95 backdrop-blur-md shadow-lg border-b border-[#305357] sticky top-0 z-50"
       initial={{opacity: 0, y: -20}}
       animate={{opacity: 1, y: 0}}
       transition={{duration: 0.3}}>
@@ -21,7 +21,7 @@ const Header = ({title}) => {
               animate={{opacity: 1, x: 0}}
               transition={{duration: 0.3, delay: 0.1}}>
               {title}
-              <div className="absolute -bottom-1 left-0 h-1 w-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"></div>
+              <div className="absolute -bottom-1 left-0 h-1 w-12 bg-gradient-to-r from-[#78b3bb] to-[#4f8d94] rounded-full"></div>
             </motion.h1>
           </div>
 
@@ -33,7 +33,7 @@ const Header = ({title}) => {
               <input
                 type="text"
                 placeholder="Search..."
-                className="bg-gray-700/50 border border-gray-600/50 rounded-lg py-2 pl-10 pr-4 text-sm text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="bg-[#2a4347] border border-[#3a5a60] rounded-lg py-2 pl-10 pr-4 text-sm text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#78b3bb] focus:border-transparent"
               />
             </div>
 
