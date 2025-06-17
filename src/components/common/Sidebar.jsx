@@ -2,6 +2,7 @@ import {
   MonitorIcon as MonitorCog,
   ChevronRight,
   Sun,
+  Factory,
   ThermometerSun,
   Droplets,
   Settings,
@@ -46,7 +47,7 @@ const Sidebar = () => {
       ? [
           {
             name: 'CO2 Density',
-            icon: <img src="/co2.svg" alt="CO2 Icon" className="h-7 w-7" />,
+            icon: <Factory size={20} style={{color: '#8B5CF6'}} />,
             href: `/${nodePrefix}/co2`,
           },
           {

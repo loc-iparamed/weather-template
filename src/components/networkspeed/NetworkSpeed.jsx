@@ -8,12 +8,6 @@ import Speedometer, {
 } from 'react-speedometer';
 
 const NetworkSpeed = ({speed}) => {
-  // const getSpeedQuality = speed => {
-  //   if (speed < 5) return {text: 'Slow', color: '#ff3200'};
-  //   if (speed < 15) return {text: 'Good', color: '#ddff00'};
-  //   return {text: 'Excellent', color: '#15ffbf'};
-  // };
-
   return (
     <motion.div
       className="bg-gray-800/70 backdrop-blur-md shadow-xl rounded-xl p-5 border border-gray-700/50 w-full flex flex-col items-center relative overflow-hidden"
