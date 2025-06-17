@@ -46,13 +46,7 @@ const Sidebar = () => {
       ? [
           {
             name: 'CO2 Density',
-            icon: (
-              <img
-                src="/weather-template/co2.svg"
-                alt="CO2 Icon"
-                className="h-7 w-7"
-              />
-            ),
+            icon: <img src="/co2.svg" alt="CO2 Icon" className="h-7 w-7" />,
             href: `/${nodePrefix}/co2`,
           },
           {
