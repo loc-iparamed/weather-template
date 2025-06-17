@@ -48,7 +48,7 @@ const Sidebar = () => {
             name: 'CO2 Density',
             icon: (
               <img
-                src="/weather-station/co2.svg"
+                src="/weather-template/co2.svg"
                 alt="CO2 Icon"
                 className="h-7 w-7"
               />
