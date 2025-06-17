@@ -23,7 +23,7 @@ const LoginPage = () => {
 
       localStorage.setItem('access_token', response.data.access_token);
       localStorage.setItem('refresh_token', response.data.refresh_token);
-      navigate('/weather-station/');
+      navigate('/weather-template/');
     } catch (err) {
       setError(err.response?.data?.error || 'Login Failed!');
     } finally {

@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 const Header = ({title}) => {
   const navigate = useNavigate();
   const handleAdminClick = () => {
-    navigate('/weather-station/users');
+    navigate('/weather-template/users');
   };
   return (
     <motion.header

@@ -13,13 +13,13 @@ import {memo} from 'react';
 import {motion} from 'framer-motion';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 
-const BASE_PATH = '/weather-station';
+const BASE_PATH = '/weather-template';
 
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const match = location.pathname.match(/\/weather-station\/(node\d)/);
+  const match = location.pathname.match(/\/weather-template\/(node\d)/);
   const nodePrefix = match ? match[1] : '';
 
   const isNode1 = nodePrefix === 'node1';

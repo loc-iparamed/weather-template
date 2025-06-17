@@ -1,6 +1,6 @@
 {
   "name": "admin-dashboard",
-  "homepage": "/weather-station/",
+  "homepage": "/weather-template/",
   "private": true,
   "version": "0.0.0",
   "type": "module",

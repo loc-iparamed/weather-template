@@ -10,60 +10,60 @@ import DeviceInfoPage from './pages/DeviceInfoPage';
 import PeoplePresentChart from './components/people_present_chart/PeoplePresentChart';
 import SettingsPage from './pages/SettingsPage';
 import Header from './components/common/Header';
-import DashboardNode2 from './pages/DashboardNode2';
+// import DashboardNode2 from './pages/DashboardNode2';
 
 const AppRoutes = () => {
   return useRoutes([
     {
-      path: '/weather-station/login',
+      path: '/weather-template/login',
       element: <LoginPage />,
     },
     {
-      path: '/weather-station/',
+      path: '/weather-template/',
       element: <ListNode />,
     },
     {
-      path: '/weather-station/node1/dashboard',
+      path: '/weather-template/node1/dashboard',
       element: <DashboardNode1 />,
     },
     {
-      path: '/weather-station/node2/dashboard',
+      path: '/weather-template/node2/dashboard',
       element: <DashboardNode1 />,
     },
     {
-      path: '/weather-station/node1/temperature',
+      path: '/weather-template/node1/temperature',
       element: <DashboardNode1 />,
     },
     {
-      path: '/weather-station/presents',
+      path: '/weather-template/presents',
       element: <PresentsPage />,
     },
     {
-      path: '/weather-station/tracking',
+      path: '/weather-template/tracking',
       element: <TrackingPage />,
     },
     {
-      path: '/weather-station/deviceinfo',
+      path: '/weather-template/deviceinfo',
       element: <DeviceInfoPage />,
     },
     {
-      path: '/weather-station/view',
+      path: '/weather-template/view',
       element: <PeoplePresentChart />,
     },
     {
-      path: '/weather-station/settings',
+      path: '/weather-template/settings',
       element: <SettingsPage />,
     },
     {
       path: '*',
-      element: <Navigate to="/weather-station/" />,
+      element: <Navigate to="/weather-template/" />,
     },
   ]);
 };
 
 function App() {
   const location = useLocation();
-  const isListNode = location.pathname === '/weather-station/';
+  const isListNode = location.pathname === '/weather-template/';
   const routing = AppRoutes();
   return (
     <div className="flex h-screen bg-gray-900 text-gray-100 overflow-hidden">

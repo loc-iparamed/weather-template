@@ -35,7 +35,7 @@ const MapComponent = ({latitude, longitude, zoom = 17, speed}) => {
   const styleSheetRef = useRef(null);
 
   const busIcon = L.icon({
-    iconUrl: '/weather-station/school-bus-marker.svg',
+    iconUrl: '/weather-template/school-bus-marker.svg',
     iconSize: [50, 50],
     iconAnchor: [25, 25],
     popupAnchor: [0, -25],

@@ -3,8 +3,8 @@ import {motion} from 'framer-motion';
 import {useNavigate} from 'react-router-dom';
 
 const nodeList = [
-  {name: 'Node 1', path: '/weather-station/node1/dashboard'},
-  {name: 'Node 2', path: '/weather-station/node2/dashboard'},
+  {name: 'Node 1', path: '/weather-template/node1/dashboard'},
+  {name: 'Node 2', path: '/weather-template/node2/dashboard'},
 ];
 
 const ListNode = () => {
