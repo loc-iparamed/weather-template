@@ -3,14 +3,18 @@ import Sidebar from './components/common/Sidebar';
 import 'leaflet/dist/leaflet.css';
 import DashboardNode1 from './pages/DashboardNode1';
 import ListNode from './pages/ListNode';
-import PresentsPage from './pages/PresentsPage';
 import LoginPage from './pages/LoginPage';
-import TrackingPage from './pages/TrackingPage';
-import DeviceInfoPage from './pages/DeviceInfoPage';
-import PeoplePresentChart from './components/people_present_chart/PeoplePresentChart';
+import ControlPage from './pages/ControlPage';
+import TemperatureNode1 from './pages/TemperatureNode1';
+import HumidityNode1 from './pages/HumidityNode1';
+import CO2Node1 from './pages/CO2Node1';
+import LightNode1 from './pages/LightNode1';
+import TemperatureNode2 from './pages/TemperatureNode2';
+import HumidityNode2 from './pages/HumidityNode2';
+import BatteryNode2 from './pages/BatteryNode2';
 import SettingsPage from './pages/SettingsPage';
 import Header from './components/common/Header';
-// import DashboardNode2 from './pages/DashboardNode2';
+import DashboardNode2 from './pages/DashboardNode2';
 
 const AppRoutes = () => {
   return useRoutes([
@@ -28,27 +32,39 @@ const AppRoutes = () => {
     },
     {
       path: '/weather-template/node2/dashboard',
-      element: <DashboardNode1 />,
+      element: <DashboardNode2 />,
     },
     {
       path: '/weather-template/node1/temperature',
-      element: <DashboardNode1 />,
+      element: <TemperatureNode1 />,
     },
     {
-      path: '/weather-template/presents',
-      element: <PresentsPage />,
+      path: '/weather-template/node1/humidity',
+      element: <HumidityNode1 />,
     },
     {
-      path: '/weather-template/tracking',
-      element: <TrackingPage />,
+      path: '/weather-template/node1/light',
+      element: <LightNode1 />,
     },
     {
-      path: '/weather-template/deviceinfo',
-      element: <DeviceInfoPage />,
+      path: '/weather-template/node1/co2',
+      element: <CO2Node1 />,
     },
     {
-      path: '/weather-template/view',
-      element: <PeoplePresentChart />,
+      path: '/weather-template/node1/controller',
+      element: <ControlPage />,
+    },
+    {
+      path: '/weather-template/node2/temperature',
+      element: <TemperatureNode2 />,
+    },
+    {
+      path: '/weather-template/node2/humidity',
+      element: <HumidityNode2 />,
+    },
+    {
+      path: '/weather-template/node2/battery',
+      element: <BatteryNode2 />,
     },
     {
       path: '/weather-template/settings',

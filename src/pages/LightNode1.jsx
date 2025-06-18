@@ -1,11 +1,8 @@
-import {MapPinned} from 'lucide-react';
 import {motion} from 'framer-motion';
 import mqtt from 'mqtt';
 import {useEffect, useState} from 'react';
-import Header from '../components/common/Header';
-import SpeedometerComponent from '../components/speedometer/SpeedometerComponent';
-import MapComponent from '../components/map/MapComponent';
-import LocationDisplay from '../components/locationdisplay/LocationDisplay';
+
+import LightPhotonWidget from '../components/light-photon-widget/LightPhotonWidget';
 
 const BROKER = 'wss://mqtt1.eoh.io:8084';
 const TOKEN = '37383e7d-6c71-453d-8996-389c19673b4e';
@@ -32,11 +29,11 @@ const topics = {
     'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/92134/value',
 };
 
-const TrackingPage = () => {
+const LightNode1 = () => {
   const [dashboardData, setDashboardData] = useState({
-    peopleGetOn: 4,
-    peopleGetOff: 2,
-    peoplePresent: 0,
+    peopleGetOn: 25,
+    peopleGetOff: 16,
+    peoplePresent: 300,
     latitude: 10.784239,
     longitude: 106.6403606,
     speed: 45,
@@ -80,39 +77,17 @@ const TrackingPage = () => {
 
   return (
     <div className="flex-1 overflow-auto relative z-10">
-      <Header title="Tracking View" />
-      <main className="max-w-10xl mx-auto py-8 px-4 lg:px-8">
+      <main className="max-w-8xl mx-auto py-8 px-4 lg:px-8">
         <motion.div
+          className="grid grid-cols-2 gap-5 mb-5"
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
-          <div className="grid grid-cols-1 grid-rows-[auto_1fr] gap-5">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-              <LocationDisplay
-                name="GPS Location"
-                icon={MapPinned}
-                value={{
-                  latitude: dashboardData.latitude,
-                  longitude: dashboardData.longitude,
-                  gpsStatus: dashboardData.gpsStatus,
-                  speed: dashboardData.speed,
-                }}
-                color="#60a5fa"
-              />
-              <SpeedometerComponent speed={dashboardData.speed} />
-            </div>
-            <div className="min-h-[900px] gap-5">
-              <MapComponent
-                latitude={dashboardData.latitude}
-                longitude={dashboardData.longitude}
-                speed={dashboardData.speed}
-              />
-            </div>
-          </div>
+          <LightPhotonWidget photonValue={dashboardData.cpuUsage} />
         </motion.div>
       </main>
     </div>
   );
 };
 
-export default TrackingPage;
+export default LightNode1;

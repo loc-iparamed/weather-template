@@ -2,7 +2,7 @@ import {
   MonitorIcon as MonitorCog,
   ChevronRight,
   Sun,
-  Factory,
+  Cloud,
   ThermometerSun,
   Droplets,
   Settings,
@@ -46,8 +46,8 @@ const Sidebar = () => {
     ...(isNode1
       ? [
           {
-            name: 'CO2 Density',
-            icon: <Factory size={20} style={{color: '#8B5CF6'}} />,
+            name: 'CO2 Concentration',
+            icon: <Cloud size={20} style={{color: '#8B5CF6'}} />,
             href: `/${nodePrefix}/co2`,
           },
           {
@@ -58,7 +58,7 @@ const Sidebar = () => {
 
           {
             name: 'Controller',
-            icon: <Settings size={18} style={{color: '#ec4899'}} />,
+            icon: <Settings size={18} style={{color: '#a5b4fc'}} />,
             href: `/${nodePrefix}/controller`,
           },
         ]

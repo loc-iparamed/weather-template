@@ -1,11 +1,8 @@
 import {motion} from 'framer-motion';
 import mqtt from 'mqtt';
 import {useEffect, useState} from 'react';
-import Header from '../components/common/Header';
-import StorageChart from '../components/storagechart/StorageChart';
+
 import ThermalCpu from '../components/thermalcpu/ThermalCpu';
-import UsageCpu from '../components/usagecpu/UsageCpu';
-import NetworkSpeed from '../components/networkspeed/NetworkSpeed';
 
 const BROKER = 'wss://mqtt1.eoh.io:8084';
 const TOKEN = '37383e7d-6c71-453d-8996-389c19673b4e';
@@ -32,11 +29,11 @@ const topics = {
     'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/92134/value',
 };
 
-const DeviceInfoPage = () => {
+const TemperatureNode1 = () => {
   const [dashboardData, setDashboardData] = useState({
-    peopleGetOn: 4,
-    peopleGetOff: 2,
-    peoplePresent: 0,
+    peopleGetOn: 25,
+    peopleGetOff: 16,
+    peoplePresent: 300,
     latitude: 10.784239,
     longitude: 106.6403606,
     speed: 45,
@@ -80,29 +77,17 @@ const DeviceInfoPage = () => {
 
   return (
     <div className="flex-1 overflow-auto relative z-10">
-      <Header title="Device Info View" />
       <main className="max-w-8xl mx-auto py-8 px-4 lg:px-8">
         <motion.div
-          className="mt-5"
+          className="grid grid-cols-3 gap-5 mb-5"
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
-          <div className="grid grid-cols-2 gap-5">
-            <StorageChart
-              totalGb={dashboardData.totalGb}
-              usedGb={dashboardData.usedGb}
-              freeGb={dashboardData.freeGb}
-            />
-            <NetworkSpeed speed={dashboardData.uploadSpeed} />
-          </div>
-          <div className="grid grid-rows-2 grid-cols-1 gap-3">
-            <ThermalCpu cpuTemp={dashboardData.cpuTemp} />
-            <UsageCpu cpuUsage={dashboardData.cpuUsage} />
-          </div>
+          <ThermalCpu cpuTemp={dashboardData.cpuTemp} />
         </motion.div>
       </main>
     </div>
   );
 };
 
-export default DeviceInfoPage;
+export default TemperatureNode1;

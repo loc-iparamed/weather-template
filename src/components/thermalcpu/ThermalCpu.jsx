@@ -75,7 +75,7 @@ const ThermalCpu = ({cpuTemp}) => {
           maxCompleted={100}
           bgColor={getTempColor(cpuTemp)}
           baseBgColor="#374151"
-          height="12px"
+          height="18px"
           width="100%"
           isLabelVisible={false}
           borderRadius="6px"

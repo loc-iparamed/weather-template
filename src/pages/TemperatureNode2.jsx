@@ -2,11 +2,7 @@ import {motion} from 'framer-motion';
 import mqtt from 'mqtt';
 import {useEffect, useState} from 'react';
 
-import ThermalCpu from '../components/thermalcpu/ThermalCpu';
-import UsageCpu from '../components/usagecpu/UsageCpu';
-import LightPhotonWidget from '../components/light-photon-widget/LightPhotonWidget';
-import CO2Widget from '../components/co2-widget/CO2Widget';
-import ClinicNode1Chart from '../components/clinic_node1_chart/ClinicNode1Chart';
+import TemperatureWidget from '../components/temperature-widget/TemperatureWidget';
 
 const BROKER = 'wss://mqtt1.eoh.io:8084';
 const TOKEN = '37383e7d-6c71-453d-8996-389c19673b4e';
@@ -33,7 +29,7 @@ const topics = {
     'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/92134/value',
 };
 
-const DashboardNode1 = () => {
+const TemperatureNode2 = () => {
   const [dashboardData, setDashboardData] = useState({
     peopleGetOn: 25,
     peopleGetOff: 16,
@@ -87,24 +83,11 @@ const DashboardNode1 = () => {
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
-          <ThermalCpu cpuTemp={dashboardData.cpuTemp} />
-          <UsageCpu cpuUsage={dashboardData.cpuUsage} />
-          <CO2Widget co2Level={dashboardData.peoplePresent} />
-        </motion.div>
-        <motion.div
-          className="grid grid-cols-2 gap-5 mb-5"
-          initial={{opacity: 0, y: 20}}
-          animate={{opacity: 1, y: 0}}
-          transition={{duration: 0.5}}>
-          <LightPhotonWidget photonValue={dashboardData.uploadSpeed} />
-          <ClinicNode1Chart
-            temperature={dashboardData.peopleGetOn}
-            humidity={dashboardData.peopleGetOff}
-          />
+          <TemperatureWidget temperature={dashboardData.cpuTemp} />
         </motion.div>
       </main>
     </div>
   );
 };
 
-export default DashboardNode1;
+export default TemperatureNode2;

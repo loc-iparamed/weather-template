@@ -3,7 +3,7 @@ import ReactApexChart from 'react-apexcharts';
 import {motion} from 'framer-motion';
 import {Activity} from 'lucide-react';
 
-const PeoplePresentChart = ({peoplePresent}) => {
+const RealtimeNode2Chart = ({peoplePresent}) => {
   const [series, setSeries] = useState([{data: []}]);
   const [maxPeople, setMaxPeople] = useState(1);
 
@@ -12,21 +12,18 @@ const PeoplePresentChart = ({peoplePresent}) => {
       const now = new Date(
         new Date().toLocaleString('en-US', {timeZone: 'Asia/Ho_Chi_Minh'}),
       );
-      setSeries(prevSeries => {
+      setSeries(prev => {
         const newData = [
-          ...prevSeries[0].data.slice(-19),
+          ...prev[0].data.slice(-19),
           {x: now, y: peoplePresent},
         ];
-
-        const currentMax = Math.max(...newData.map(point => point.y), 1);
+        const currentMax = Math.max(...newData.map(p => p.y), 1);
         if (currentMax > maxPeople) {
           setMaxPeople(currentMax);
         }
-
         return [{data: newData}];
       });
     }, 1000);
-
     return () => clearInterval(interval);
   }, [peoplePresent, maxPeople]);
 
@@ -45,70 +42,48 @@ const PeoplePresentChart = ({peoplePresent}) => {
       fontFamily: 'Inter, sans-serif',
     },
     colors: ['#8b5cf6'],
-    stroke: {
-      curve: 'smooth',
-      width: 3,
-    },
-    dataLabels: {
-      enabled: false,
-    },
+    stroke: {curve: 'smooth', width: 3},
+    dataLabels: {enabled: false},
     xaxis: {
       type: 'datetime',
       labels: {
-        style: {colors: 'white', fontSize: '14px'},
-        formatter: value => {
-          return new Date(value).toLocaleTimeString('vi-VN', {
+        style: {colors: 'white', fontSize: '13px'},
+        formatter: value =>
+          new Date(value).toLocaleTimeString('vi-VN', {
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit',
-          });
-        },
+          }),
       },
       axisBorder: {show: false},
       axisTicks: {show: false},
     },
     yaxis: {
       labels: {
-        style: {
-          colors: 'white',
-          fontSize: '14px',
-        },
-        formatter: value => `${Math.round(value)}`,
+        style: {colors: 'white', fontSize: '13px'},
+        formatter: val => `${Math.round(val)}`,
       },
       min: 0,
-      max: Math.max(maxPeople + 1, 3), // Ensure we have some headroom
+      max: Math.max(maxPeople + 1, 3),
       tickAmount: 2,
     },
     grid: {
-      borderColor: 'rgba(107, 114, 128, 0.2)',
+      borderColor: 'rgba(107,114,128,0.2)',
       strokeDashArray: 5,
-      xaxis: {
-        lines: {show: true},
-      },
-      yaxis: {
-        lines: {show: true},
-      },
-      padding: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 20,
-      },
+      xaxis: {lines: {show: true}},
+      yaxis: {lines: {show: true}},
+      padding: {left: 15, right: 10},
     },
     tooltip: {
       theme: 'dark',
-      x: {
-        format: 'HH:mm:ss',
-      },
+      x: {format: 'HH:mm:ss'},
     },
     markers: {
       size: 3,
       colors: ['#5dd0fd'],
       strokeColors: '#111827',
       strokeWidth: 2,
-      hover: {
-        size: 5,
-      },
+      hover: {size: 5},
     },
     fill: {
       type: 'gradient',
@@ -127,7 +102,7 @@ const PeoplePresentChart = ({peoplePresent}) => {
 
   return (
     <motion.div
-      className="bg-gray-800/70 backdrop-blur-md shadow-xl rounded-xl p-4 border border-gray-700/50 relative overflow-hidden"
+      className="bg-gray-800/70 backdrop-blur-md shadow-xl rounded-xl p-5 border border-gray-700/50 relative overflow-hidden"
       initial={{opacity: 0, y: 20}}
       animate={{opacity: 1, y: 0}}
       transition={{delay: 0.1, duration: 0.1}}
@@ -136,20 +111,18 @@ const PeoplePresentChart = ({peoplePresent}) => {
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
         transition: {duration: 0.1},
       }}>
-      <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute -top-20 -right-20 w-44 h-44 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute -bottom-20 -left-20 w-44 h-44 bg-purple-400/10 rounded-full blur-3xl"></div>
 
-      <div className="flex items-center justify-between w-full h-1 mb-8 mt-5">
-        <div className="flex items-center">
-          <h2 className="text-2xl font-medium text-gray-200">CO2 Density</h2>
-        </div>
-        <div className="flex items-center px-2 py-1 bg-gray-700/50 rounded-md text-xs text-gray-400">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-semibold text-gray-100">CO₂ Density</h2>
+        <div className="flex items-center px-2 py-1 bg-gray-700/50 rounded-md text-xs text-gray-300">
           <Activity className="h-3 w-3 mr-1 text-green-400" />
           Live
         </div>
       </div>
 
-      <div className="h-80 w-full">
+      <div className="h-72 w-full">
         <ReactApexChart
           options={options}
           series={series}
@@ -162,4 +135,4 @@ const PeoplePresentChart = ({peoplePresent}) => {
   );
 };
 
-export default PeoplePresentChart;
+export default RealtimeNode2Chart;

@@ -52,7 +52,7 @@ const UsageCpu = ({cpuUsage}) => {
               r="45"
               fill="transparent"
               stroke="#374151"
-              strokeWidth="8"
+              strokeWidth="9"
             />
             <circle
               cx="50"
@@ -60,7 +60,7 @@ const UsageCpu = ({cpuUsage}) => {
               r="45"
               fill="transparent"
               stroke={getUsageColor(cpuUsage)}
-              strokeWidth="8"
+              strokeWidth="9"
               strokeDasharray={`${cpuUsage * 2.83} 283`}
               strokeDashoffset="0"
               transform="rotate(-90 50 50)"
@@ -71,7 +71,7 @@ const UsageCpu = ({cpuUsage}) => {
               textAnchor="middle"
               dominantBaseline="middle"
               fill="white"
-              fontSize="25"
+              fontSize="26"
               fontWeight="bold">
               {cpuUsage}%
             </text>
@@ -90,12 +90,12 @@ const UsageCpu = ({cpuUsage}) => {
           maxCompleted={100}
           bgColor={getUsageColor(cpuUsage)}
           baseBgColor="#374151"
-          height="12px"
+          height="18px"
           width="100%"
           isLabelVisible={false}
           borderRadius="6px"
         />
-        <div className="flex justify-between items-center mb-2">
+        <div className="flex justify-between items-center mb-1">
           <div className="text-sm text-gray-400 mb-2">
             {cpuUsage > 90
               ? 'High humidity'
