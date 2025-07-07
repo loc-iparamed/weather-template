@@ -5,46 +5,20 @@ import {useEffect, useState} from 'react';
 import LightPhotonWidget from '../components/light-photon-widget/LightPhotonWidget';
 
 const BROKER = 'wss://mqtt1.eoh.io:8084';
-const TOKEN = '37383e7d-6c71-453d-8996-389c19673b4e';
+const TOKEN = '2c916d8d-3e86-4c14-a8a6-ca1762df14ec';
 
 const topics = {
-  latitude: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89602/value',
-  longitude: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89603/value',
-  speed: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89604/value',
-  peopleGetOn:
-    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89605/value',
-  peopleGetOff:
-    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89606/value',
-  totalGb: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89607/value',
-  usedGb: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89608/value',
-  freeGb: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89609/value',
-  cpuUsage: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89610/value',
-  isStorageFull:
-    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89611/value',
-  cpuTemp: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89612/value',
-  gpsStatus: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89613/value',
-  peoplePresent:
-    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/90122/value',
-  uploadSpeed:
-    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/92134/value',
+  humid: 'eoh/chip/2c916d8d-3e86-4c14-a8a6-ca1762df14ec/config/120303/value',
+  temp: 'eoh/chip/2c916d8d-3e86-4c14-a8a6-ca1762df14ec/config/119620/value',
+  co2: 'eoh/chip/2c916d8d-3e86-4c14-a8a6-ca1762df14ec/config/120305/value',
+  light: 'eoh/chip/2c916d8d-3e86-4c14-a8a6-ca1762df14ec/config/120304/value',
 };
-
 const LightNode1 = () => {
   const [dashboardData, setDashboardData] = useState({
-    peopleGetOn: 25,
-    peopleGetOff: 16,
-    peoplePresent: 300,
-    latitude: 10.784239,
-    longitude: 106.6403606,
-    speed: 45,
-    totalGb: 238.68,
-    usedGb: 38.68,
-    freeGb: 200,
-    cpuUsage: 20,
-    isStorageFull: false,
-    cpuTemp: 36,
-    gpsStatus: null,
-    uploadSpeed: 20,
+    co2: 10,
+    humid: 70,
+    temp: 32,
+    light: 1,
   });
 
   useEffect(() => {
@@ -83,7 +57,7 @@ const LightNode1 = () => {
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
-          <LightPhotonWidget photonValue={dashboardData.cpuUsage} />
+          <LightPhotonWidget photonValue={dashboardData.light} />
         </motion.div>
       </main>
     </div>

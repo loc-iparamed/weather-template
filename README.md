@@ -1,4 +1,4 @@
-<h1 align="center">Weather Station</h1>
+<h1 align="center">Farm Monitoring & Control</h1>
 
 ### The project is built with:
 

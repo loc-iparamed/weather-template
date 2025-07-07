@@ -1,16 +1,16 @@
 import {motion} from 'framer-motion';
-import {Sun, Zap} from 'lucide-react';
-import Speedometer, {
-  Background,
-  Arc,
-  Progress,
-  Indicator,
-} from 'react-speedometer';
+import {Sun, Moon, Zap} from 'lucide-react';
 
-const LightPhotonWidget = ({photonValue}) => {
+const LightPhotonWidget = ({lightDetected}) => {
+  const hasLight = lightDetected === 1;
+
   return (
     <motion.div
-      className="bg-gradient-to-br from-yellow-500/10 to-gray-800/70 backdrop-blur-md shadow-2xl rounded-2xl p-6 border border-yellow-500/30 w-full flex flex-col items-center relative overflow-hidden"
+      className={`bg-gradient-to-br ${
+        hasLight
+          ? 'from-yellow-400/20 to-gray-800/70 border-yellow-400/40'
+          : 'from-gray-600/20 to-gray-800/70 border-gray-500/40'
+      } backdrop-blur-md shadow-2xl rounded-2xl p-6 border w-full flex flex-col items-center relative overflow-hidden`}
       whileHover={{
         y: -5,
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
@@ -19,61 +19,56 @@ const LightPhotonWidget = ({photonValue}) => {
       initial={{opacity: 0, y: 20}}
       animate={{opacity: 1, y: 0}}
       transition={{delay: 0.1}}>
-      <div className="absolute -top-24 -right-24 w-48 h-48 bg-yellow-400/10 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-yellow-400/10 rounded-full blur-3xl"></div>
+      <div
+        className={`absolute -top-24 -right-24 w-48 h-48 ${
+          hasLight ? 'bg-yellow-400/20' : 'bg-gray-400/20'
+        } rounded-full blur-3xl`}></div>
+      <div
+        className={`absolute -bottom-24 -left-24 w-48 h-48 ${
+          hasLight ? 'bg-yellow-400/20' : 'bg-gray-400/20'
+        } rounded-full blur-3xl`}></div>
 
       <div className="flex items-center justify-between w-full mb-4">
-        <h2 className="text-3xl font-semibold text-yellow-400 flex items-center">
-          <Zap className="w-6 h-6 mr-2 animate-pulse" /> Light Intensity
+        <h2
+          className={`text-3xl font-semibold flex items-center ${
+            hasLight ? 'text-yellow-400' : 'text-gray-300'
+          }`}>
+          <Zap className="w-6 h-6 mr-2 animate-pulse" /> Light Detection
         </h2>
-        <div className="flex items-center px-3 py-1 bg-yellow-500/10 border border-yellow-300/40 rounded-md text-sm text-yellow-200">
-          <Sun className="w-4 h-4 mr-1" /> Emission
+        <div
+          className={`flex items-center px-3 py-1 ${
+            hasLight
+              ? 'bg-yellow-500/10 border-yellow-300/40 text-yellow-200'
+              : 'bg-gray-500/10 border-gray-300/40 text-gray-200'
+          } border rounded-md text-sm`}>
+          {hasLight ? (
+            <>
+              <Sun className="w-4 h-4 mr-1" /> Detected
+            </>
+          ) : (
+            <>
+              <Moon className="w-4 h-4 mr-1" /> No Light
+            </>
+          )}
         </div>
       </div>
 
-      <div className="w-full h-[420px] flex justify-center relative">
-        <Speedometer
-          value={photonValue}
-          max={1000}
-          accentColor="#facc15"
-          angle={180}
-          width={680}
-          height={360}
-          fontFamily="Inter, sans-serif">
-          <Background angle={180} color="#facc15" opacity={0.15} />
-          <Arc arcWidth={24} color="#1f2937" />
-          <Progress arcWidth={24} color="#facc15" />
-          <Indicator>
-            {(value, textProps) => (
-              <g>
-                <text
-                  {...textProps}
-                  fontSize={64}
-                  fill="white"
-                  x={340}
-                  y={230}
-                  textAnchor="middle"
-                  fontWeight="bold">
-                  {value}
-                </text>
-                <text
-                  {...textProps}
-                  fontSize={20}
-                  fill="#facc15"
-                  x={340}
-                  y={270}
-                  textAnchor="middle"
-                  opacity={0.8}>
-                  photons/s·m²
-                </text>
-              </g>
-            )}
-          </Indicator>
-        </Speedometer>
-
-        <div className="absolute top-[28%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-yellow-300 opacity-80">
-          <Sun size={90} strokeWidth={1.5} className="animate-spin-slow" />
-        </div>
+      <div className="flex flex-col items-center mt-20">
+        {hasLight ? (
+          <>
+            <Sun size={200} className="text-yellow-300 animate-pulse mb-10" />
+            <span className="text-yellow-200 text-6xl font-semibold">
+              Light Detected
+            </span>
+          </>
+        ) : (
+          <>
+            <Moon size={200} className="text-gray-400 animate-fade-in mb-10" />
+            <span className="text-gray-300 text-6xl font-medium">
+              No Light Detected
+            </span>
+          </>
+        )}
       </div>
     </motion.div>
   );

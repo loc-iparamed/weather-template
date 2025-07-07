@@ -6,8 +6,6 @@ import {
   ThermometerSun,
   Droplets,
   Settings,
-  LogOut,
-  HelpCircle,
   BatteryFull,
 } from 'lucide-react';
 import {memo} from 'react';
@@ -71,12 +69,6 @@ const Sidebar = () => {
         ]),
   ];
 
-  const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    navigate(`${BASE_PATH}/login`);
-  };
-
   return (
     <motion.div
       className="fixed md:relative z-30 h-screen w-64 flex-shrink-0"
@@ -130,48 +122,7 @@ const Sidebar = () => {
               );
             })}
           </div>
-
-          {/* Divider */}
-          <div className="my-6 border-t border-gray-700/30" />
-
-          <div className="space-y-1">
-            <motion.div
-              className="flex items-center p-3 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-gray-700/40 transition-all duration-200 cursor-pointer"
-              whileHover={{x: 4}}
-              whileTap={{scale: 0.98}}>
-              <div className="flex items-center justify-center h-8 w-8 rounded-lg bg-gray-700/30">
-                <HelpCircle size={18} className="text-gray-400" />
-              </div>
-              <motion.span className="ml-3">Help & Support</motion.span>
-            </motion.div>
-
-            <motion.button
-              onClick={handleLogout}
-              className="flex items-center w-full px-5 py-2 text-sm font-medium rounded-lg text-red-400 hover:text-white hover:bg-gray-700/40 transition-all duration-200"
-              whileHover={{x: 4}}
-              whileTap={{scale: 0.98}}>
-              <LogOut size={20} />
-              <motion.span className="ml-3">Logout</motion.span>
-            </motion.button>
-          </div>
         </nav>
-
-        {/* User profile */}
-        <motion.div
-          className="p-4 border-t border-gray-700/50 mt-auto"
-          initial={{opacity: 0, y: 20}}
-          animate={{opacity: 1, y: 0}}
-          transition={{duration: 0.3}}>
-          <div className="flex items-center">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold">
-              A
-            </div>
-            <div className="ml-3">
-              <p className="text-sm font-medium text-white">Admin User</p>
-              <p className="text-xs text-gray-400">admin@maixcam.com</p>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </motion.div>
   );

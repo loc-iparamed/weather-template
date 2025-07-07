@@ -4,15 +4,15 @@ import {Droplet} from 'lucide-react';
 const HumidityWidget = ({humidity}) => {
   const getColor = h => {
     if (h < 30) return '#60A5FA'; // Dry - blue
-    if (h < 60) return '#22C55E'; // Normal - green
-    if (h < 80) return '#FACC15'; // Humid - yellow
+    if (h < 80) return '#22C55E'; // Normal - green
+    if (h < 90) return '#FACC15'; // Humid - yellow
     return '#EF4444'; // Very Humid - red
   };
 
   const getStatus = h => {
     if (h < 30) return 'Dry';
-    if (h < 60) return 'Comfortable';
-    if (h < 80) return 'Humid';
+    if (h < 80) return 'Comfortable';
+    if (h < 90) return 'Humid';
     return 'Very Humid';
   };
 

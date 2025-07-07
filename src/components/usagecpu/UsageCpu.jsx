@@ -4,8 +4,8 @@ import {Droplet} from 'lucide-react';
 
 const UsageCpu = ({cpuUsage}) => {
   const getUsageColor = usage => {
-    if (usage < 50) return '#0866ff'; // Low - blue
-    if (usage < 80) return '#FACC15'; // Medium - yellow
+    if (usage < 50) return '#FACC15'; // Low - blue
+    if (usage < 80) return '#0866ff'; // Medium - yellow #FACC15
     return '#EF4444'; // High - red
   };
 

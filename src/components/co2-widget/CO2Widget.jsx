@@ -3,16 +3,16 @@ import {Cloud} from 'lucide-react';
 
 const CO2Widget = ({co2Level}) => {
   const getColor = level => {
-    if (level < 400) return '#22C55E'; // Excellent
-    if (level < 800) return '#FACC15'; // Moderate
-    if (level < 1200) return '#FB923C'; // Poor
+    if (level < 150) return '#22C55E'; // Excellent
+    if (level < 350) return '#FACC15'; // Moderate
+    if (level < 500) return '#FB923C'; // Poor
     return '#EF4444'; // Hazardous
   };
 
   const getStatus = level => {
-    if (level < 400) return 'Excellent';
-    if (level < 800) return 'Moderate';
-    if (level < 1200) return 'Poor';
+    if (level < 150) return 'Excellent';
+    if (level < 350) return 'Moderate';
+    if (level < 500) return 'Poor';
     return 'Hazardous';
   };
 
@@ -53,8 +53,8 @@ const CO2Widget = ({co2Level}) => {
 
       <div className="w-full mt-4 text-sm text-gray-400 flex justify-between">
         <span>0 ppm</span>
-        <span>800 ppm</span>
-        <span>1600 ppm</span>
+        <span>350 ppm</span>
+        <span>500 ppm</span>
       </div>
     </motion.div>
   );

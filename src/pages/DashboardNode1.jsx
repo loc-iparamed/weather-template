@@ -9,46 +9,21 @@ import CO2Widget from '../components/co2-widget/CO2Widget';
 import ClinicNode1Chart from '../components/clinic_node1_chart/ClinicNode1Chart';
 
 const BROKER = 'wss://mqtt1.eoh.io:8084';
-const TOKEN = '37383e7d-6c71-453d-8996-389c19673b4e';
+const TOKEN = '2c916d8d-3e86-4c14-a8a6-ca1762df14ec';
 
 const topics = {
-  latitude: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89602/value',
-  longitude: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89603/value',
-  speed: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89604/value',
-  peopleGetOn:
-    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89605/value',
-  peopleGetOff:
-    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89606/value',
-  totalGb: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89607/value',
-  usedGb: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89608/value',
-  freeGb: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89609/value',
-  cpuUsage: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89610/value',
-  isStorageFull:
-    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89611/value',
-  cpuTemp: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89612/value',
-  gpsStatus: 'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/89613/value',
-  peoplePresent:
-    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/90122/value',
-  uploadSpeed:
-    'eoh/chip/37383e7d-6c71-453d-8996-389c19673b4e/config/92134/value',
+  humid: 'eoh/chip/2c916d8d-3e86-4c14-a8a6-ca1762df14ec/config/120303/value',
+  temp: 'eoh/chip/2c916d8d-3e86-4c14-a8a6-ca1762df14ec/config/119620/value',
+  co2: 'eoh/chip/2c916d8d-3e86-4c14-a8a6-ca1762df14ec/config/120305/value',
+  light: 'eoh/chip/2c916d8d-3e86-4c14-a8a6-ca1762df14ec/config/120304/value',
 };
 
 const DashboardNode1 = () => {
   const [dashboardData, setDashboardData] = useState({
-    peopleGetOn: 25,
-    peopleGetOff: 16,
-    peoplePresent: 300,
-    latitude: 10.784239,
-    longitude: 106.6403606,
-    speed: 45,
-    totalGb: 238.68,
-    usedGb: 38.68,
-    freeGb: 200,
-    cpuUsage: 20,
-    isStorageFull: false,
-    cpuTemp: 36,
-    gpsStatus: null,
-    uploadSpeed: 20,
+    co2: 10,
+    humid: 70,
+    temp: 32,
+    light: 1,
   });
 
   useEffect(() => {
@@ -67,11 +42,20 @@ const DashboardNode1 = () => {
 
     client.on('message', (topic, message) => {
       const parsedMessage = JSON.parse(message.toString());
-      const value = parsedMessage?.v || 0;
-      setDashboardData(prev => ({
-        ...prev,
-        [Object.keys(topics).find(key => topics[key] === topic)]: value,
-      }));
+      let value = parsedMessage?.v || 0;
+
+      const matchedKey = Object.keys(topics).find(key => topics[key] === topic);
+
+      if (matchedKey === 'temp') {
+        value = Math.round(value * 10) / 10;
+      }
+
+      if (matchedKey) {
+        setDashboardData(prev => ({
+          ...prev,
+          [matchedKey]: value,
+        }));
+      }
     });
 
     return () => {
@@ -87,19 +71,19 @@ const DashboardNode1 = () => {
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
-          <ThermalCpu cpuTemp={dashboardData.cpuTemp} />
-          <UsageCpu cpuUsage={dashboardData.cpuUsage} />
-          <CO2Widget co2Level={dashboardData.peoplePresent} />
+          <ThermalCpu cpuTemp={dashboardData.temp} />
+          <UsageCpu cpuUsage={dashboardData.humid} />
+          <CO2Widget co2Level={dashboardData.co2} />
         </motion.div>
         <motion.div
           className="grid grid-cols-2 gap-5 mb-5"
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.5}}>
-          <LightPhotonWidget photonValue={dashboardData.uploadSpeed} />
+          <LightPhotonWidget photonValue={dashboardData.light} />
           <ClinicNode1Chart
-            temperature={dashboardData.peopleGetOn}
-            humidity={dashboardData.peopleGetOff}
+            temperature={dashboardData.temp}
+            humidity={dashboardData.humid}
           />
         </motion.div>
       </main>

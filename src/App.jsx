@@ -91,7 +91,7 @@ function App() {
         {!isListNode && <Sidebar />}
       </>
       <div className="flex flex-col flex-1 overflow-auto">
-        {<Header title="Weather Station" />}
+        {<Header title="Farm Monitoring & Control" />}
         {routing}
       </div>
     </div>
