@@ -1,6 +1,6 @@
 import {useRoutes, useLocation, Navigate} from 'react-router-dom';
 import Sidebar from './components/common/Sidebar';
-import 'leaflet/dist/leaflet.css';
+
 import DashboardNode1 from './pages/DashboardNode1';
 import ListNode from './pages/ListNode';
 import LoginPage from './pages/LoginPage';
