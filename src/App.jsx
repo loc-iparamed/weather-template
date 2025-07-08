@@ -3,7 +3,6 @@ import Sidebar from './components/common/Sidebar';
 
 import DashboardNode1 from './pages/DashboardNode1';
 import ListNode from './pages/ListNode';
-import LoginPage from './pages/LoginPage';
 import ControlPage from './pages/ControlPage';
 import TemperatureNode1 from './pages/TemperatureNode1';
 import HumidityNode1 from './pages/HumidityNode1';
@@ -12,16 +11,11 @@ import LightNode1 from './pages/LightNode1';
 import TemperatureNode2 from './pages/TemperatureNode2';
 import HumidityNode2 from './pages/HumidityNode2';
 import BatteryNode2 from './pages/BatteryNode2';
-import SettingsPage from './pages/SettingsPage';
 import Header from './components/common/Header';
 import DashboardNode2 from './pages/DashboardNode2';
 
 const AppRoutes = () => {
   return useRoutes([
-    {
-      path: '/weather-template/login',
-      element: <LoginPage />,
-    },
     {
       path: '/weather-template/',
       element: <ListNode />,
@@ -65,10 +59,6 @@ const AppRoutes = () => {
     {
       path: '/weather-template/node2/battery',
       element: <BatteryNode2 />,
-    },
-    {
-      path: '/weather-template/settings',
-      element: <SettingsPage />,
     },
     {
       path: '*',
