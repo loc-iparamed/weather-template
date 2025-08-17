@@ -4,15 +4,15 @@ import {Cloud} from 'lucide-react';
 const CO2Widget = ({co2Level}) => {
   const getColor = level => {
     if (level < 150) return '#22C55E'; // Excellent
-    if (level < 350) return '#FACC15'; // Moderate
-    if (level < 500) return '#FB923C'; // Poor
+    if (level < 200) return '#FACC15'; // Moderate
+    if (level < 300) return '#FB923C'; // Poor
     return '#EF4444'; // Hazardous
   };
 
   const getStatus = level => {
     if (level < 150) return 'Excellent';
-    if (level < 350) return 'Moderate';
-    if (level < 500) return 'Poor';
+    if (level < 200) return 'Moderate';
+    if (level < 300) return 'Poor';
     return 'Hazardous';
   };
 
@@ -46,15 +46,15 @@ const CO2Widget = ({co2Level}) => {
         <div
           className="absolute h-5 rounded-full transition-all duration-500  "
           style={{
-            width: `${Math.min(co2Level / 20, 100)}%`,
+            width: `${Math.min((co2Level / 300) * 100, 100)}%`,
             backgroundColor: color,
           }}></div>
       </div>
 
       <div className="w-full mt-4 text-sm text-gray-400 flex justify-between">
         <span>0 ppm</span>
-        <span>350 ppm</span>
-        <span>500 ppm</span>
+        <span>150 ppm</span>
+        <span>300 ppm</span>
       </div>
     </motion.div>
   );

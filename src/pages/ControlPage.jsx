@@ -71,14 +71,15 @@ const ControlPage = () => {
   const features = [
     {
       key: 'light',
-      label: 'Light',
-      icon: <Lightbulb className="w-5 h-5 text-yellow-400" />,
+      label: 'Fan',
+      icon: <Fan className="w-5 h-5 text-cyan-400" />,
+
       value: dashboardData.light_control,
     },
     {
       key: 'fan',
-      label: 'Fan',
-      icon: <Fan className="w-5 h-5 text-cyan-400" />,
+      label: 'Light',
+      icon: <Lightbulb className="w-5 h-5 text-yellow-400" />,
       value: dashboardData.fan,
     },
     {
